@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4 Quiz</title>
+    <link rel="icon" type="image/x-icon" href="../images/elites.png">
+    <link rel="stylesheet" href="right.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Style the back button position at the top-left */
+        .back-arrow {
+            position: absolute;
+            top: 130px;
+            left: 20px;
+            background-color: #2671bd; /* Green background */
+            color: white; /* White text */
+            border-radius: 20px;
+            padding: 10px;
+            
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .back-arrow:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="backg"></div>
+    <div class="logo">
+        <a href="/..us.html"><img src="../images/logo.jpg" alt="Logo"></a>
+    </div>
+
+    <!-- Main Quiz Container -->
+    <div class="quiz-container" id="quizContainer">
+        <!-- Back arrow positioned at the top-left of the question block -->
+        <button id="backArrow" class="back-arrow">← Back</button>
+        <h2>Translate the sign language shown in the video.</h2>
+        <video id="video" controls>
+            <source src="../videos/18More.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="options"></div>
+        <p id="result" class="result"></p>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <div class="pb">
+                <button id="prevButton">&larr; Back</button>
+            </div>
+            <button id="checkButton" onclick="checkAnswer()" disabled>Check Answer</button>
+            <div class="nb">
+                <button id="nextButton">Next &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load background content
+        fetch('backgroundright.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('backg').innerHTML = data;
+            });
+
+        const questions = [
+            { videoSrc: '../videos/16EatFood.mp4', options: ['Eat food', 'Want', 'What', 'Mother'], correctAnswer: 'Eat food' },
+            { videoSrc: '../videos/17Milk.mp4', options: ['hello', 'No', 'Dog', 'Milk'], correctAnswer: 'Milk' },
+            { videoSrc: '../videos/18More.mp4', options: ['Father', 'More', 'Cat', 'Mother'], correctAnswer: 'More' },
+            { videoSrc: '../videos/19GoTo.mp4', options: ['Want', 'Again', 'Go to', 'Why'], correctAnswer: 'Go to' },
+            { videoSrc: '../videos/20Bathroom.mp4', options: ['Again', 'No', 'Why', 'Bathroom'], correctAnswer: 'Bathroom' }
+        ];
+
+        let currentIndex = 0;
+        let selectedAnswer = null;
+
+        function loadQuestion() {
+            const question = questions[currentIndex];
+            document.getElementById('video').src = question.videoSrc;
+
+            const optionsContainer = document.querySelector('.options');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option';
+                button.onclick = () => selectOption(button);
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('checkButton').disabled = false;
+            document.getElementById('result').textContent = '';
+        }
+
+        function selectOption(button) {
+            document.querySelectorAll('.option').forEach(option => option.classList.remove('selected'));
+            button.classList.add('selected');
+            selectedAnswer = button.textContent;
+        }
+
+        function checkAnswer() {
+            const question = questions[currentIndex];
+            const result = selectedAnswer === question.correctAnswer ? 'Correct!' : 'Incorrect!';
+            document.getElementById('result').textContent = result;
+        }
+
+        document.getElementById('prevButton').onclick = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadQuestion();
+            }
+        };
+
+        document.getElementById('nextButton').onclick = () => {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            }
+            else{
+                window.location.href = 'right.html';
+            }
+        };
+
+        // Back arrow button redirects to right.html
+        document.getElementById('backArrow').onclick = () => {
+            window.location.href = 'right.html';
+        };
+
+        // Initialize the quiz
+        window.onload = function() {
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>

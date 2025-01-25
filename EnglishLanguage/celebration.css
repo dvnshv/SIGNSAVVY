@@ -1,0 +1,143 @@
+/* Body and General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Celebration Container */
+.celebration-container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Text Styling */
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #FFD700; /* Gold color */
+}
+
+p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+/* Party Effects Styling */
+.party-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Confetti Styling */
+.confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Confetti Piece Styling */
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f00;
+    animation: fall linear;
+}
+
+/* Confetti Animation */
+@keyframes fall {
+    from {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* Next Level Button Styling */
+#nextLessonButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    z-index: 2;
+}
+
+#nextLessonButton:hover {
+    background-color: #218838;
+}
+
+/* Styling for Questions and Options */
+#quizContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #333;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+#video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#question {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.option {
+    background-color: #444;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.option:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.option.selected {
+    background-color: #28a745;
+}
