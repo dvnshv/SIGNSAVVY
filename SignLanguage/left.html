@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Quiz</title>
+    <link rel="icon" type="image/x-icon" href="../images/elites.png">
+    <link rel="stylesheet" href="left.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="backg"></div>
+    <div class="logo">
+        <a href="../us.html"><img src="../images/logo.jpg" alt="Logo"></a>
+    </div>
+    <!-- Difficulty Selection Screen (Initially Hidden) -->
+    <div class="difficulty-screen" id="difficultyScreen">
+        <h2>Select Module</h2>
+        <div class="difficulty-options">
+            <a href="level1.html" target="_main"><div class="difficulty-option">Module 1</div></a>
+            <a href="level2.html" target="_main"><div class="difficulty-option">Module 2</div></a>
+            <a href="level3.html" target="_main"><div class="difficulty-option">Module 3</div></a>
+            <a href="level4.html" target="_main"><div class="difficulty-option">Module 4</div></a>
+        </div>
+    </div>
+
+    <!-- Main Quiz Container (Initially Hidden) -->
+    <div class="quiz-container" id="quizContainer" style="display: none;">
+        <button id="backArrow" class="back-arrow">←</button>
+        <h2>Translate the sign language shown in the video.</h2>
+        <video id="video" controls>
+            <source src="../videos/1hello.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="options"></div>
+        <button id="checkButton" onclick="checkAnswer()" disabled>Check Answer</button>
+        <p id="result" class="result"></p>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <div class="pb">
+                <button id="prevButton">&larr; Back</button>
+            </div>
+            <div class="nb">
+                <button id="nextButton">Next &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('backgroundleft.html')
+    .then(response => response.text())
+    .then(data => {
+    document.getElementById('backg').innerHTML = data;
+});
+    </script>
+</body>
+</html>

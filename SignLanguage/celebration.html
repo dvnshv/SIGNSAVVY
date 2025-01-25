@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations!</title>
+    <link rel="icon" type="image/x-icon" href="../images/elites.png">
+    <link rel="stylesheet" href="celebration.css">
+</head>
+<body>
+    <div id="backg"></div>
+    <div class="celebration-container">
+        <h1>Congratulations!</h1>
+        <p>You did it!</p>
+        <div class="party-effects">
+            <!-- Add your party effects here -->
+        </div>
+        <button id="nextLessonButton" onclick="redirectToNextLevel()">Next Lesson</button>
+    </div>
+    <script>
+        fetch('backgroundleft.html')
+           .then(response => response.text())
+           .then(data => {
+           document.getElementById('backg').innerHTML = data;
+        });
+        function redirectToNextLevel() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nextLevel = urlParams.get('next');
+            if (nextLevel) {
+                window.location.href = `${nextLevel}.html`;
+            }
+        }
+    </script>
+</body>
+</html>

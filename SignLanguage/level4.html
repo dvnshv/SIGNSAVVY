@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4 Quiz</title>
+    <link rel="icon" type="image/x-icon" href="../images/elites.png">
+    <link rel="stylesheet" href="left.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Style the back button position at the top-left */
+        .back-arrow {
+            position: absolute;
+            top: 130px;
+            left: 20px;
+            background-color: #2671bd; /* Green background */
+            color: white; /* White text */
+            border-radius: 20px;
+            padding: 10px;
+            
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .back-arrow:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="backg"></div>
+    <div class="logo">
+        <a href="../us.html"><img src="../images/logo.jpg" alt="Logo"></a>
+    </div>
+
+    <!-- Main Quiz Container -->
+    <div class="quiz-container" id="quizContainer">
+        <!-- Back arrow positioned at the top-left of the question block -->
+        <button id="backArrow" class="back-arrow">← Back</button>
+
+        <h2>Translate the sign language shown in the video.</h2>
+        <!-- <video id="video" controls>
+            <source src="../videos/18More.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+        <div class="options"></div>
+        <p id="result" class="result"></p>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <div class="pb">
+                <button id="prevButton">&larr; Back</button>
+            </div>
+            <button id="checkButton" onclick="checkAnswer()" disabled>Check Answer</button>
+            <div class="nb">
+                <button id="nextButton">Next &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load background content
+        fetch('backgroundleft.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('backg').innerHTML = data;
+            });
+
+            const questions = [
+    { 
+        question: 'Which of the following is the sign for See You Later?', 
+        options: ['../videos/1hello.mp4', '../videos/4Father.mp4', '../videos/11Want.mp4', '../videos/2SYL.mp4'], 
+        correctAnswer: '../videos/2SYL.mp4'
+    },
+    { 
+        question: 'Which of the following is the sign for Again?', 
+        options: ['../videos/11Want.mp4', '../videos/4Father.mp4', '../videos/15Again.mp4', '../videos/5Mother.mp4'], 
+        correctAnswer: '../videos/15Again.mp4'
+    },
+    { 
+        question: 'Which of the following is the sign for More?', 
+        options: ['../videos/1hello.mp4', '../videos/6Yes.mp4', '../videos/18More.mp4', '../videos/8Help.mp4'], 
+        correctAnswer: '../videos/18More.mp4'
+    },
+    { 
+        question: 'Which of the following is the sign for Go To?', 
+        options: ['../videos/19GoTo.mp4', '../videos/4Father.mp4', '../videos/11Want.mp4', '../videos/7No.mp4'], 
+        correctAnswer: '../videos/19GoTo.mp4'
+    },
+    { 
+        question: 'Which of the following is the sign for Wash Room?', 
+        options: ['../videos/20Bathroom.mp4', '../videos/9Please.mp4', '../videos/16EatFood.mp4', '../videos/12What.mp4'], 
+        correctAnswer: '../videos/20Bathroom.mp4'
+    }
+];
+currentIndex=0;
+selectedAnswer=null;
+function loadQuestion() {
+    const question = questions[currentIndex];
+    document.querySelector('h2').textContent = question.question;
+
+    const optionsContainer = document.querySelector('.options');
+    optionsContainer.innerHTML = '';
+
+    question.options.forEach(option => {
+        const video = document.createElement('video');
+        video.src = option;
+        video.className = 'option-video';
+        video.muted = true; // Ensures the video is muted
+        video.onmouseover = () => video.play();
+        video.onmouseout = () => video.pause();
+        video.onclick = () => selectOption(video);
+        optionsContainer.appendChild(video);
+    });
+
+    document.getElementById('checkButton').disabled = false;
+    document.getElementById('result').textContent = '';
+}
+
+function selectOption(video) {
+    document.querySelectorAll('.option-video').forEach(option => option.classList.remove('selected'));
+    video.classList.add('selected');
+    selectedAnswer = video.src;
+}
+
+        function checkAnswer() {
+            const question = questions[currentIndex];
+    
+    // Get the selected option's file name
+    const selectedFileName = selectedAnswer.split('/').pop(); // Extracts the file name from the path
+    
+    // Get the correct answer's file name
+    const correctFileName = question.correctAnswer.split('/').pop();
+    
+    // Compare the file names
+    const result = selectedFileName === correctFileName ? 'Correct!' : 'Incorrect!';
+    document.getElementById('result').textContent = result;
+        }
+
+        document.getElementById('prevButton').onclick = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadQuestion();
+            }
+        };
+
+        document.getElementById('nextButton').onclick = () => {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                loadQuestion();
+            }
+            else{
+                window.location.href = 'left.html';
+            }
+        };
+
+        // Back arrow button redirects to right.html
+        document.getElementById('backArrow').onclick = () => {
+            window.location.href = 'left.html';
+        };
+
+        // Initialize the quiz
+        window.onload = function() {
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>
