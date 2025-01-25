@@ -1,0 +1,74 @@
+/* General reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Full height for body and html */
+body, html {
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Basic styling for each section */
+.background-section {
+    height: 25vh;
+    width: 100%;
+    position: relative;
+    transform-origin: left center;
+    transition: transform 0.3s ease, background 0.3s ease; /* Smooth transition for transform and background */
+}
+
+/* Section-specific background colors and transforms */
+.section1 {
+    height:30vh;
+    background: #180161; /* Light coral */
+    transform: skewY(-5deg);
+}
+
+.section2 {
+    height: 50vh;
+    background: #EB3678; /* Yellow-orange */
+    transform: skewY(5deg);
+}
+
+.section3 {
+    height:25vh;
+    background: #4F1787; /* Light green */
+    transform: skewY(-15deg);
+}
+
+.section4 {
+    height:20vh;
+    background: #FFB200; /* Purple */
+    transform: skewY(2.9deg);
+}
+
+/* Hover effects */
+.section1:hover {
+    background: #2A629A; /* Darker coral */
+}
+
+.section2:hover {
+    background: #028391; /* Darker yellow-orange */
+}
+
+.section3:hover {
+    background: #F6DCAC; /* Darker green */
+}
+.section4:hover {
+    background: #FEAE6F; /* Darker green */
+}
+
+/* Responsive design to adjust the height on smaller screens */
+@media (max-width: 600px) {
+    .background-section {
+        height: 50vh;
+        transform: none; /* Remove skew on smaller screens for better readability */
+    }
+    
+    .background-section:hover {
+        transform: none; /* Disable hover effect on smaller screens */
+    }
+}
